@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/front.css') }}">
+    <title>Kiki chaotic shop</title>
+</head>
+<body>
+
+<header>
+    <div style="height: 5VH"></div>
+    <div id="header-img-box">
+        <img id="header-img" src="{{ url_for('static', filename='/dlaczegonazwy.jpg') }}" alt="logo">
+        <h1 id="header-text"> Hi, welcome in my shop</h1>
+        <br>
+    </div>
+</header>
+
+<main>
+
+    <div class="styled-border">
+        <h2 id="header-text">the page it's still work in progress, so you can't buy directly from it but send my your
+            cart on instagram/facebook or email and i gonna make it happen </h2>
+    </div>
+
+    <div id="cart-icon">
+        🛒
+    </div>
+    <audio id="removeAudio" src="{{ url_for('static', filename='sounds/removeSound.wav') }}" preload="auto"></audio>
+    <audio id="addAudio" src="{{ url_for('static', filename='sounds/addSound.wav') }}" preload="auto"></audio>
+    <div id="cart-panel">
+        <h2>Twój koszyk</h2>
+        <div id="cart-items">
+        </div>
+        <div id="cart-cost">
+
+        </div>
+        <button onclick="clearCart()">Wyczyść koszyk</button>
+
+        <h3>Dane do wysyłki</h3>
+        <form id="checkout-form">
+            <input type="text" name="name" placeholder="Imię i nazwisko" required><br>
+            <input type="text" name="address" placeholder="Adres dostawy" required><br>
+            <input type="email" name="email" placeholder="Adres e-mail" required><br>
+            <button type="submit">Zamów</button>
+        </form>
+    </div>
+
+    <div id="message">
+        <div class="styled-border">
+            <div id="clea-message">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="border">
+
+        <div id="item_list">
+
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+
+<script>
+
+</script>
+
+<script>
+    let list_of_items = {{ items | tojson | safe }};
+    const data = JSON.parse(list_of_items);
+    let card_list = document.getElementById('item_list');
+    const cart_objet = new Map()
+    const item_map = new Map()
+    data.forEach(item => {
+        card_list.appendChild(generate_item_card(item));
+        item_map.set(item.id, item)
+    });
+
+    function generate_item_card(item) {
+        const info_section = document.createElement('div');
+        info_section.classList.add('info-section');
+
+        const top_info = document.createElement('div');
+        top_info.classList.add('top-info');
+
+        const styled_border = document.createElement('div');
+        styled_border.classList.add('styled-border');
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const new_img = document.createElement('img');
+        new_img.classList.add('item-pic');
+        new_img.src = "data:image/jpeg;base64," + item.picture;
+        new_img.alt = item.name;
+
+        const nameEl = document.createElement('h2');
+        nameEl.classList.add('item_name');
+        nameEl.textContent = item.name;
+
+        function createInfoRow(label, value) {
+            const row = document.createElement('p');
+            row.classList.add('par');
+            row.innerHTML = `<strong>${label}:</strong> ${value}`;
+            return row;
+        }
+
+        const button = document.createElement('button');
+        button.id = 'button' + item.id;
+        button.className = 'action-button';
+        button.textContent = 'Kup teraz';
+
+        button.addEventListener('click', () => {
+            button.addEventListener('click', () => {
+                showAddToCartPopup(item.id);
+            });
+        });
+
+
+        styled_border.appendChild(card);
+        card.appendChild(new_img);
+        card.appendChild(info_section);
+        info_section.appendChild(top_info);
+        info_section.appendChild(button);
+
+        top_info.appendChild(nameEl);
+        top_info.appendChild(createInfoRow('ID', item.id));
+        top_info.appendChild(createInfoRow('Cena', item.price));
+        top_info.appendChild(createInfoRow('Dostępność', item.amount));
+        top_info.appendChild(createInfoRow('Typ', item.type));
+        top_info.appendChild(createInfoRow('Źródło', item.character_source));
+        top_info.appendChild(createInfoRow('Gatunek', item.genre));
+        top_info.appendChild(createInfoRow('Data dodania', item.drop_data));
+        top_info.appendChild(createInfoRow('Odnawialny', item.renewable));
+
+        return styled_border;
+    }
+
+    function showAddToCartPopup(item_id) {
+        const messageBox = document.getElementById("message");
+        messageBox.innerHTML = ""; // Czyści zawartość
+        messageBox.style.display = "block";
+
+        const border = document.createElement('div')
+        border.classList.add('styled-border-popup')
+        const hide_button = document.createElement('div')
+        const hide = document.createElement('button')
+        hide.textContent = 'x';
+        hide.addEventListener("click", () => {
+            messageBox.innerHTML = "";
+            messageBox.style.display = "none";
+        });
+        // Stwórz kontener popupu
+        const popup = document.createElement("div");
+        popup.classList.add('popup-class')
+
+        // Zdjęcie
+        const img = document.createElement("img");
+        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
+        img.alt = item_map.get(item_id).name;
+        img.style.width = "100px";
+        img.style.height = "100px";
+        img.style.objectFit = "cover";
+        img.style.marginBottom = "10px";
+
+        // Informacje
+        const name = document.createElement("h3");
+        name.textContent = item_map.get(item_id).name;
+
+        const stock = document.createElement("p");
+        stock.textContent = "Dostępność: " + item_map.get(item_id).amount;
+
+        const price = document.createElement("p");
+        price.textContent = "Cena: " + item_map.get(item_id).price + " zł/szt";
+
+        // Pole ilości
+        const input = document.createElement("input");
+        input.type = "number";
+        input.min = "1";
+        input.max = item_map.get(item_id).amount;
+        input.value = "1";
+        input.style.margin = "10px 0";
+        input.style.width = "80%";
+
+        // Przycisk dodaj
+        const button = document.createElement("button");
+        button.textContent = "Dodaj do koszyka";
+        button.style.marginTop = "10px";
+        button.style.padding = "8px 12px";
+        button.style.cursor = "pointer";
+
+        button.addEventListener("click", () => {
+            const amountToAdd = parseInt(input.value);
+
+            if (isNaN(amountToAdd) || amountToAdd < 1 || (cart_objet.get(item_id) + amountToAdd) > item_map.get(item_id).amount) {
+                input.style.border = "2px solid red";
+                return;
+            }
+            cart_objet.set(item_id, (cart_objet.get(item_id) || 0) + amountToAdd)
+            createCartItemCard(item_id)
+            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
+            document.getElementById('addAudio').currentTime = 0
+            document.getElementById('addAudio').play()
+            // Ukryj popup
+            messageBox.innerHTML = "";
+            messageBox.style.display = "none";
+        });
+
+        // Dodaj wszystko do popupu
+        hide_button.appendChild(hide);
+        border.appendChild(hide_button)
+
+
+        popup.appendChild(img);
+        popup.appendChild(name);
+        popup.appendChild(stock);
+        popup.appendChild(price);
+        popup.appendChild(input);
+        popup.appendChild(button);
+        border.appendChild(popup)
+
+        messageBox.appendChild(border)
+        messageBox.style.display = "block";
+    }
+
+    function showRemoveFromCartPopup(item_id) {
+        if (!cart_objet.get(item_id)) {
+            return;
+        }
+        const item = item_map.get(item_id);
+
+        if (!item) {
+            console.warn("Przedmiot nie istnieje w koszyku.");
+            return;
+        }
+
+        const messageBox = document.getElementById("message");
+        messageBox.innerHTML = "";
+        const border = document.createElement('div')
+        border.classList.add('styled-border-popup')
+        const hide_button = document.createElement('div')
+        const hide = document.createElement('button')
+        hide.textContent = 'x';
+        hide.addEventListener("click", () => {
+            messageBox.innerHTML = "";
+            messageBox.style.display = "none";
+        });
+
+        // Stwórz kontener popupu
+        const popup = document.createElement("div");
+        popup.classList.add('popup-class');
+
+        // Zdjęcie
+        const img = document.createElement("img");
+        img.src = "data:image/jpeg;base64," + item.picture;
+        img.alt = item.name;
+        img.style.width = "100px";
+        img.style.height = "100px";
+        img.style.objectFit = "cover";
+        img.style.marginBottom = "10px";
+
+        const name = document.createElement("h3");
+        name.textContent = item.name;
+
+        const inCart = document.createElement("p");
+        inCart.textContent = "W koszyku: " + item.amount;
+
+        const price = document.createElement("p");
+        price.textContent = "Cena: " + item.price + " zł/szt";
+
+        const input = document.createElement("input");
+        input.type = "number";
+        input.min = "1";
+        input.max = item.amount;
+        input.value = "1";
+        input.style.margin = "10px 0";
+        input.style.width = "80%";
+
+        const button = document.createElement("button");
+        button.textContent = "Usuń z koszyka";
+        button.style.marginTop = "10px";
+        button.style.padding = "8px 12px";
+        button.style.cursor = "pointer";
+
+        button.addEventListener("click", () => {
+            const toRemove = parseInt(input.value);
+            if (isNaN(toRemove) || toRemove < 1 || toRemove > item.amount) {
+                input.style.border = "2px solid red";
+                return;
+            }
+
+            if (toRemove >= cart_objet.get(item_id)) {
+                const card = document.getElementById(`cart-item-${item_id}`);
+                if (card) card.remove();
+                cart_objet.delete(item_id)
+                createCartItemCard(item_id)
+
+            } else {
+                cart_objet.set(item_id, (cart_objet.get(item_id) - toRemove))
+                createCartItemCard(item_id)
+            }
+            document.getElementById('removeAudio').currentTime = 0
+            document.getElementById('removeAudio').play()
+            sessionStorage.setItem("cart", JSON.stringify(cart_objet));
+            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
+
+            messageBox.innerHTML = "";
+            messageBox.style.display = "none";
+        });
+
+        hide_button.appendChild(hide);
+        border.appendChild(hide_button)
+
+
+        popup.appendChild(img);
+        popup.appendChild(name);
+        popup.appendChild(price);
+        popup.appendChild(input);
+        popup.appendChild(button);
+        border.appendChild(popup)
+
+        messageBox.appendChild(border)
+        messageBox.style.display = "block";
+    }
+</script>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        loadCartFromSession();
+    });
+
+    function loadCartFromSession() {
+        const json = sessionStorage.getItem("sessionCart");
+        if (!json) {
+            // pusta mapa, jeśli nic nie ma
+        }
+        // Parsujemy do tablicy
+        const entries = JSON.parse(json);
+        // Odtwarzamy Mapę
+        let temp = new Map(entries);
+        temp.forEach((value, key) => {
+            cart_objet.set(key, value);
+            createCartItemCard(key)
+        })
+        // Zaktualizuj całkowity koszt
+        const total = calculateTotal();
+        document.getElementById("cart-cost").innerText = total + " zł";
+    }
+
+    function saveCartToSession() {
+        const entries = Array.from(cart_objet.entries());
+        // Serializujemy
+        const json = JSON.stringify(entries);
+        // Zapisujemy
+        sessionStorage.setItem("sessionCart", json);
+    }
+
+    function createCartItemCard(item_id) {
+        console.log('item sent to create cart function')
+        console.log(item_id)
+        console.log(cart_objet.get(item_id))
+        console.log(cart_objet)
+        if (cart_objet.get(item_id) === undefined) {
+            return;
+        }
+        let card = document.createElement('div');
+        if (document.getElementById(`cart-item-${item_id}`)) {
+            console.log('div found');
+            card = document.getElementById(`cart-item-${item_id}`);
+            card.innerHTML = '';
+        } else {
+            console.log('created new div');
+            card = document.createElement('div');
+            card.classList.add("mini-item-card");
+            card.id = `cart-item-${item_id}`;
+        }
+
+
+        const img = document.createElement("img");
+        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
+        img.alt = item_map.get(item_id).name;
+        img.classList.add("mini-item-img");
+        card.appendChild(img);
+
+        const name = document.createElement("p");
+        name.classList.add("mini-item-name");
+        name.textContent = item_map.get(item_id).name;
+        card.appendChild(name);
+
+        const details = document.createElement("p");
+        details.classList.add("mini-item-details");
+        details.textContent = `x${cart_objet.get(item_id)} | ${item_map.get(item_id).price} zł/szt`;
+        card.appendChild(details);
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Usuń";
+        removeBtn.classList.add("remove-button");
+        removeBtn.addEventListener("click", () => {
+            showRemoveFromCartPopup(item_id);
+        });
+        card.appendChild(removeBtn);
+        document.getElementById("cart-items").appendChild(card);
+    }
+
+    function calculateTotal() {
+        console.log('calculate price')
+        let total = 0;
+
+        cart_objet.forEach((value, key, mapInstance) => {
+            total += value * item_map.get(key).price
+        });
+
+        saveCartToSession()
+        animated_cart()
+        return total.toFixed(2);
+    }
+
+    function clearCart() {
+        sessionStorage.removeItem("cart");
+        sessionStorage.clear();
+        document.getElementById("cart-items").innerHTML = "";
+        document.getElementById("cart-cost").innerText = "0.00";
+        document.getElementById('removeAudio').currentTime = 0;
+        document.getElementById('removeAudio').play();
+        animated_cart();
+        cart_objet.clear();
+    }
+</script>
+<script>
+    const cartIcon = document.getElementById('cart-icon');
+    const cartPanel = document.getElementById('cart-panel');
+
+    cartIcon.addEventListener('click', () => {
+        cartPanel.style.display = cartPanel.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Możesz tu później dynamicznie dodawać produkty do #cart-items
+    // np. document.getElementById("cart-items").innerHTML += "<p>Produkt X</p>";
+
+    // Przykładowe przechwycenie formularza
+    document.getElementById('checkout-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Zamówienie złożone! ✉️");
+        // tutaj można wysłać dane do backendu
+    });
+</script>
+
+{#element animacji#}
+<script>
+    function animated_cart() {
+        const div_cart = document.getElementById('cart-icon');
+        div_cart.classList.remove('animate-cart-start');
+        void div_cart.offsetWidth;
+        div_cart.classList.add('animate-cart-start');
+        div_cart.addEventListener('animationend', function handler() {
+            div_cart.classList.remove('animate-cart-start');
+            div_cart.removeEventListener('animationend', handler);
+        });
+    }
+
+</script>
+
+</body>
+</html>
