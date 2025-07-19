@@ -5,15 +5,32 @@ kikshop;
 CREATE TABLE assortment
 (
     id               BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    name             VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
+    name             VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
     img              BLOB                                not NULL,
     price            FLOAT                               NOT NULL,
     amount           SMALLINT                            not NULL,
-    type             VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
-    genre            VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
-    character_source VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
-    renewable        VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
+    type             VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    variant          VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    tags             VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    feature          VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    character_source VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    renewable        VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
     drop_data        DATE                                NOT NULL
+);
+
+CREATE TABLE client_order
+(
+    id              BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    items           VARCHAR(255) COLLATE utf8_polish_ci NOT NULL,
+    price           FLOAT                               NOT NULL,
+    city            VARCHAR(30) COLLATE utf8_polish_ci NOT NULL,
+    street          VARCHAR(50) COLLATE utf8_polish_ci NOT NULL,
+    postal_code     VARCHAR(15) COLLATE utf8_polish_ci NOT NULL,
+    building_number VARCHAR(10) COLLATE utf8_polish_ci NOT NULL,
+    local_number    VARCHAR(10) COLLATE utf8_polish_ci NOT NULL,
+    status          VARCHAR(40) COLLATE utf8_polish_ci NOT NULL,
+    order_data      DATE                                NOT NULL
+
 );
 
 CREATE
