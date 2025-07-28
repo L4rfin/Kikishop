@@ -14,6 +14,6 @@ class Assortment(Base):
     variant = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
     item_tags = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
     feature = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
-    renewable = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
     work_source = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
+    renewable = sqlalchemy.Column(sqlalchemy.VARCHAR(255), nullable=False)
     drop_data = sqlalchemy.Column(sqlalchemy.DATE,nullable=False)

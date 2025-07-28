@@ -1,3 +1,7 @@
+h4 {
+    margin: 0
+}
+
 .item_list {
     display: flex;
     gap: 20px;
@@ -22,7 +26,12 @@
     width: max-content;
 }
 
+.card:hover {
+    animation: glowCartBorder 1.8s linear;
+}
+
 .card-news {
+    margin-right: 10px;
     display: grid;
     border: 2px solid #ccc;
     border-radius: 8px;
@@ -37,11 +46,20 @@
 
 .news-image {
     height: 40VH;
+    justify-self: center;
+}
+
+.pressable-h1:hover {
+    animation: blub 0.5s linear reverse;
+}
+
+.pressable-h1 {
+    cursor: pointer;
 }
 
 #event-plan-layout {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-bottom: 20px;
     margin-top: 20px;
 }
@@ -54,15 +72,11 @@
 
 #event-plan-div {
     display: grid;
-    width: 40VW;
-    margin-top: 16px;
-    padding: 10px 20px;
-    background-color: #2979ff;
     color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
 
+    border-radius: 34px 34px 50px 50px;
+    width: fit-content;
+    min-width: 24vw;
 }
 
 #event-plan-header {
@@ -89,6 +103,7 @@
     gap: 8px 16px;
     font-size: 14px;
 }
+
 
 .top-info p {
     margin: 4px 0;
@@ -160,26 +175,6 @@
 }
 
 /* Formularz */
-#checkout-form input {
-    width: 100%;
-    margin: 8px 0;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-#checkout-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #2979ff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#checkout-form button:hover {
-    background-color: #1565c0;
-}
 
 .mini-item-card {
     display: flex;
@@ -227,22 +222,25 @@
     text-align: center;
 }
 
+.header-p {
+    color: white;
+    font-size: x-large;
+
+}
+
 #header-text {
     text-align: center;
 }
 
 #heder-of-news-section {
-    border-radius: 111px 111px 0 0;
+    border-radius: 111px 111px 111px 111px;
     padding: 10px;
-    margin: 10px;
+    margin-left: 5VW;
+    margin-right: 5VW;
     border: 10px;
     background-color: rgba(235, 195, 219, 1);
-    background-image: linear-gradient(
-            180deg,
-            rgba(159, 132, 189, 1) 33%,
-            rgba(192, 155, 216, 1) 66%,
-            rgba(235, 195, 219, 1) 91%
-    );
+    background-color: #d3f3e6;
+
 }
 
 
@@ -265,20 +263,10 @@
 
 .text-content {
     flex: 1 1 300px;
-    max-width: 600px;
+    max-width: 40vw;
+    padding-bottom: 220px;
 }
 
-h2 {
-    color: lightcoral;
-    font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-
-p {
-    font-size: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
 
 .par {
     text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
@@ -295,47 +283,59 @@ p {
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
-    gap: 1rem; /* odstępy między elementami opcjonalnie */
-    padding: 1rem;
-    margin: 10px;
+    /*gap: 1rem; !* odstępy między elementami opcjonalnie *!*/
     scroll-behavior: smooth;
-    background-image: linear-gradient(
-            180deg,
-            rgba(159, 132, 189, 1) 33%,
-            rgba(192, 155, 216, 1) 66%,
-            rgba(235, 195, 219, 1) 91%
-    );
+    background-color: #d3f3e6;
+
     height: auto;
     border-radius: 25px;
+    scrollbar-color: #a57bff transparent;
 }
 
-#news-tab {
-    max-width: 40VW;
+
+.news-tab {
+    width: 40VW;
     margin: 10px;
-    background-color: rgba(192, 155, 216, 1);
+    background-color: #d3f3e6;
     padding: 10px;
     text-align: center;
     border-radius: 34px 34px 50px 50px;
-    border: 3px rgba(159, 132, 189, 1) solid;
     scrollbar-color: #a57bcf #f0f0f0;
     scrollbar-width: thin;
+    transition: width 0.5s ease;
+
+}
+
+#item-news-1.focus-tab {
+    width: 96vw;
+}
+
+#item-news-2.focus-tab {
+    width: 96vw;
+}
+
+#item-news-1.hidden {
+    display: none;
+}
+
+#item-news-2.hidden {
+    display: none;
 }
 
 #custom-work-div {
-    background: rebeccapurple;
-    border: 10px #0563b5 solid;
+    background-color: #d3f3e6;
     border-radius: 20px;
     margin-left: 5VW;
     margin-right: 5VW;
 }
 
 #custom-work-header {
-    border-bottom: 10px #0563b5 solid;
     text-align: center;
 }
 
 #custom-work-text {
     display: grid;
+    align-content: center;
 }
 
 #custom-work-image-box {
@@ -344,21 +344,34 @@ p {
 
 #custom-work-main {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+#custom-h3 {
+    font-size: xx-large;
+    width: 34vw;
+}
+
+#header-h2 {
+    text-align: left;
 }
 
 @media (max-width: 768px) {
-    body, html {
-        font-size: x-large;
-    }
-
+    /*body, html {*/
+    /*    font-size: x-large;*/
+    /*}*/
     .card {
         flex-direction: column;
         align-items: center;
+        width: 72vw;
+    }
+
+    .styled-border {
+        display: flex;
     }
 
     .item-pic {
-        width: 100%;
+        width: 78%;
         height: auto;
     }
 
@@ -385,9 +398,6 @@ p {
         max-width: 100%;
     }
 
-    #footer-main-container {
-        display: grid;
-    }
 
     #links {
         align-content: center;
@@ -397,19 +407,59 @@ p {
 
     #news-div {
         display: grid;
+        overflow: hidden
     }
 
-    #news-tab {
-        max-width: 91VW;
+    .news-tab {
+        width: 88vw;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .news-image {
+        width: 60vw;
+    }
+
+    #item-news-1.focus-tab {
+        width: 88vw;
+        display: grid;
+    }
+
+    #item-news-2.focus-tab {
+        width: 88vw;
+        display: grid;
+
+    }
+
+    #item-news-1.hidden {
+        display: grid;
+
+    }
+
+    #item-news-2.hidden {
+        display: grid;
+
     }
 
     #custom-work-main {
         display: grid;
     }
 
+    #custom-work-image {
+        width: 50%;
+        justify-self: center;
+    }
+
+    #custom-h3 {
+        width: auto;
+    }
+
     #header-img {
-        width: 100vw;
         height: auto;
+    }
+
+    #header-h2 {
+        text-align: center;
     }
 
     #event-plan-layout {
@@ -421,9 +471,6 @@ p {
         max-width: 91VW;
         width: auto;
     }
-    #custom-work-image{
-        width: 50%;
-        justify-self: center;
-    }
+
 }
 

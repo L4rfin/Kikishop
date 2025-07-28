@@ -2,69 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Sue Ellen Francisco' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/list.css') }}">
     <title>Kiki chaotic shop</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename="/images/favicon.gif") }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename="/images/favicon.webp") }}">
 </head>
 <title>Chaotic warehous</title>
 <body>
 
+<div id="info-banner">
+    <h1 id="info-h1"> we're sending order on monday</h1>
+</div>
+<div id="sticky-nav">
+    <div style="rotate: 180deg;" id="goback"><a href="{{ url_for('fron_page') }}"> ➜</a></div>
+    <div id="cart-icon">
+        🛒
+    </div>
+</div>
 <header>
+
 
 </header>
 
 <main>
-    <div class="styled-border">
-
-        <div>
-            <h1> select tags you like
-            <img  src="{{ url_for('static', filename='/images/favicon.gif') }}" alt="logo">
-            </h1>
-
-        </div>
-    </div>
-
-    <div style="rotate: 180deg;" id="goback"><a  href="{{ url_for('fron_page') }}"> ➜</a></div>
-    <div id="cart-icon">
-        🛒
-    </div>
-    <audio id="removeAudio" src="{{ url_for('static', filename='sounds/removeSound.wav') }}" preload="auto"></audio>
-    <audio id="addAudio" src="{{ url_for('static', filename='sounds/addSound.wav') }}" preload="auto"></audio>
-    <div id="cart-panel">
-        <h2>Twój koszyk</h2>
-        <div id="cart-items">
-        </div>
-        <div id="cart-cost">
-
-        </div>
-        <button onclick="clearCart()">Wyczyść koszyk</button>
-
-        <h3>Dane do wysyłki</h3>
-        <form id="checkout-form">
-            <input type="text" name="name" placeholder="Imię i nazwisko" required><br>
-            <input type="text" name="address" placeholder="Adres dostawy" required><br>
-            <input type="email" name="email" placeholder="Adres e-mail" required><br>
-            <button type="submit">Zamów</button>
-        </form>
-    </div>
-
-    <div id="message">
-        <div class="styled-border">
-            <div id="clea-message"></div>
-        </div>
-    </div>
-
-    <div id="main-panel-layout">
+    <div id="select-layout">
         <div id="left-checklist">
             <form id="check-list-form">
                 <button onclick="get_results()" type="button">search</button>
-
-                {#                <label>
-                    type<input type="text" placeholder="🔍">
-                </label>#}
-
                 <label id="label-for-type">
                     type<input id="show-types" type="checkbox"/>
                 </label>
@@ -94,570 +60,108 @@
             </form>
 
         </div>
+
+        <div>
+            <img id="select-img" src="{{ url_for('static', filename='/images/smallKiki.webp') }}" alt="logo">
+        </div>
+    </div>
+
+
+    <audio id="removeAudio" src="{{ url_for('static', filename='sounds/removeSound.wav') }}" preload="auto"></audio>
+    <audio id="addAudio" src="{{ url_for('static', filename='sounds/addSound.wav') }}" preload="auto"></audio>
+    <div id="cart-panel" style="right: -100vw">
+        <h2>Twój koszyk</h2>
+        <div id="cart-items">
+        </div>
+        <div id="cart-cost">
+
+        </div>
+        <button onclick="clearCart()">Wyczyść koszyk</button>
+
+        <h3>Dane do wysyłki</h3>
+        <form id="checkout-form">
+            <label>
+                name and surname
+                <input type="text" name="name" placeholder="" required><br>
+            </label>
+            <label>
+                street
+                <input type="text" name="street" placeholder="street" required>
+            </label>
+            <label>
+                building / local / letter
+            </label>
+            <label style="display: flex">
+                <input type="number" name="building_number" placeholder="building-number" required>
+                <input type="number" name="local_number" placeholder="local-number">
+                <input type="text" name="local_letter" placeholder="local-letter">
+            </label>
+            <label>
+                post code 2 | post code 3
+            </label>
+            <label style="  display: flex;">
+                <input type="number" name="post_code_2" placeholder="00" required>
+                <input type="number" name="post_code_3" placeholder="000" required>
+            </label>
+            <label>
+                location
+            </label>
+            <label>
+                <input type="text" name="city" placeholder="Warsaw" required>
+            </label>
+            <label>
+                cuntry
+            </label>
+            <label>
+                <input type="text" name="cuntry" placeholder="Poland" required>
+            </label>
+
+            <label>
+                preferowana forma komunikacji
+                <select id="communication-option" onchange="setSelectionInput()" name="communication-option">
+                    <option>Email</option>
+                </select>
+            </label>
+            <label>
+                email address
+                <input type="email" placeholder="example@gamil.com" id="input-for-communication-address"
+                       name="contact_address">
+            </label>
+            <br>
+            <br>
+            <label id="label-for-communication-method">
+            </label>
+            <button id="checkout-button" type="button">Zamów</button>
+        </form>
+    </div>
+
+    <div id="message" style="display: none;">
+        <div class="styled-border">
+            <div id="clea-message"></div>
+        </div>
+    </div>
+
+    <div id="main-panel-layout">
         <div id="item-list"></div>
     </div>
+
 </main>
 
-
-<script>
-    let list_of_items = {{ items | safe | tojson }}
+<script src="{{ url_for('static', filename='/js/operation_finalizer.js') }}"></script>
+<script src=" {{ url_for('static', filename='/js/card_generator.js') }}"></script>
+<script src=" {{ url_for('static', filename="/js/cart.js") }}"></script>
+<script type="text/javascript">
+    let list_of_items = {{  items | tojson | safe   }}
     const data = JSON.parse(list_of_items);
-    let card_list = document.getElementById('item-list');
-    const cart_objet = new Map()
-    const item_map = new Map()
-    const selected_tags = {
-        type: new Set(),
-        tags: new Set(),
-        variant: new Set(),
-        feature: new Set(),
-        source: new Set()
-    }
-    const list_of_type = data['type'];
-    const list_of_tags = data['tags'];
-    const list_of_variant = data['variant'];
-    const list_of_feature = data['feature'];
-    const list_of_source = data['source'];
-
-    generate_left_checkbox_list(list_of_type, 'list-type', 'type');
-    generate_left_checkbox_list(list_of_tags, 'list-tags', 'tags');
-    generate_left_checkbox_list(list_of_variant, 'list-variant', 'variant');
-    generate_left_checkbox_list(list_of_feature, 'list-feature', 'feature');
-    generate_left_checkbox_list(list_of_source, 'list-source', 'source');
-
-    document.getElementById('show-types').checked = false;
-    document.getElementById('show-tags').checked = false;
-    document.getElementById('show-variant').checked = false;
-    document.getElementById('show-feature').checked = false;
-    document.getElementById('show-source').checked = false;
-
-
-    function generate_left_checkbox_list(items, localisation, collection) {
-
-        const container = document.getElementById(localisation);
-
-        items.forEach(item => {
-            const label = document.createElement("label");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.value = item;
-
-            checkbox.addEventListener("change", () => {
-                if (collection === 'type') {
-                    if (selected_tags.type.has(item)) {
-                        selected_tags.type.delete(item)
-                    } else selected_tags.type.add(item)
-                }
-
-                if (collection === 'tags') {
-                    if (selected_tags.tags.has(item)) {
-                        selected_tags.tags.delete(item)
-                    } else selected_tags.tags.add(item)
-                }
-                if (collection === 'variant') {
-                    if (selected_tags.variant.has(item)) {
-                        selected_tags.variant.delete(item)
-                    } else selected_tags.variant.add(item)
-                }
-                if (collection === 'feature') {
-                    if (selected_tags.feature.has(item)) {
-                        selected_tags.feature.delete(item)
-                    } else selected_tags.feature.add(item)
-                }
-                if (collection === 'source') {
-                    if (selected_tags.source.has(item)) {
-                        selected_tags.source.delete(item)
-                    } else selected_tags.source.add(item)
-                }
-            })
-
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(" " + item));
-            container.appendChild(label);
-            container.appendChild(document.createElement("br"));
-        });
-
-    }
-
-    document.getElementById('show-types').addEventListener("change", () => {
-        document.getElementById('list-type').classList.toggle("show", document.getElementById('show-types').checked);
-    });
-    document.getElementById('show-tags').addEventListener("change", () => {
-        document.getElementById('list-tags').classList.toggle("show", document.getElementById('show-tags').checked);
-    });
-    document.getElementById('show-source').addEventListener("change", () => {
-        document.getElementById('list-source').classList.toggle("show", document.getElementById('show-source').checked);
-    });
-    document.getElementById('show-feature').addEventListener("change", () => {
-        document.getElementById('list-feature').classList.toggle("show", document.getElementById('show-feature').checked);
-    });
-    document.getElementById('show-variant').addEventListener("change", () => {
-        document.getElementById('list-variant').classList.toggle("show", document.getElementById('show-variant').checked);
-    });
-
-    function get_results() {
-        item_map.clear();
-        fetch("search", {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                type: [...selected_tags.type],
-                tags: [...selected_tags.tags],
-                variant: [...selected_tags.variant],
-                feature: [...selected_tags.feature],
-                source: [...selected_tags.source]
-            })
-        }).then(response => {
-            if (!response.ok) throw new Error("Błąd sieci!");
-            return response.json();
-        }).then(data => {
-            console.log("Odpowiedź serwera:", data['received']);
-            if (data['received']) {
-                console.log('empty')
-            }
-            generate_card(JSON.parse(data['received']))
-        }).catch(error => {
-            console.error("Wystąpił błąd:", error);
-        })
-    }
-
-    function generate_card(data) {
-        card_list.innerHTML = "";
-        data.forEach(item => {
-            item_map.set(item.id, item)
-            const info_section = document.createElement('div');
-            info_section.classList.add('info-section');
-
-            const top_info = document.createElement('div');
-            top_info.classList.add('top-info');
-
-            const button_info = document.createElement('div');
-            button_info.classList.add('button_info');
-
-            const styled_border = document.createElement('div');
-            styled_border.classList.add('styled-border');
-            styled_border.classList.add('wave-background');
-
-            const card = document.createElement('div');
-            card.classList.add('card');
-
-            const new_img = document.createElement('img');
-            new_img.classList.add('item-pic');
-            new_img.src = "data:image/jpeg;base64," + item.picture;
-            new_img.alt = item.name;
-
-            const nameEl = document.createElement('h2');
-            nameEl.classList.add('item_name');
-            nameEl.textContent = item.name;
-
-            function createInfoRow(label, value) {
-                const row = document.createElement('p');
-                row.classList.add('par');
-                if (label === 'price') {
-                    row.innerHTML = `<strong>${label}:</strong> ${value} PLN`;
-                } else {
-                    row.innerHTML = `<strong>${label}:</strong> ${value}`;
-                }
-                return row;
-            }
-
-            const button = document.createElement('button');
-            button.id = 'button' + item.id;
-            button.className = 'action-button';
-            button.textContent = 'Kup teraz';
-
-            button.addEventListener('click', () => {
-                button.addEventListener('click', () => {
-                    showAddToCartPopup(item.id);
-                });
-            });
-
-
-            styled_border.appendChild(card);
-            card.appendChild(new_img);
-            card.appendChild(info_section);
-            info_section.appendChild(top_info);
-            info_section.appendChild(button_info);
-
-            button_info.appendChild(createInfoRow('Typ', item.type));
-            button_info.appendChild(createInfoRow('source', item.work_source));
-            button_info.appendChild(createInfoRow('genre', item.type));
-            button_info.appendChild(createInfoRow('tags', item.tags));
-            button_info.appendChild(createInfoRow('feature', item.feature));
-            button_info.appendChild(createInfoRow('drop data', item.drop_data));
-            button_info.appendChild(createInfoRow('renewable', item.renewable));
-
-            top_info.appendChild(nameEl);
-            top_info.appendChild(createInfoRow('price', item.price));
-            top_info.appendChild(createInfoRow('amount', item.amount));
-            info_section.appendChild(button);
-
-            card_list.appendChild(styled_border);
-        });
-
-    }
-
 
 </script>
-<script>
+<script src="{{ url_for('static', filename='/js/search_engine.js') }}"></script>
+<script src=" {{ url_for('static', filename="/js/animation.js") }}"></script>
 
-
-    function showAddToCartPopup(item_id) {
-        const messageBox = document.getElementById("message");
-        messageBox.innerHTML = ""; // Czyści zawartość
-        messageBox.style.display = "block";
-
-        const border = document.createElement('div')
-        border.classList.add('styled-border-popup')
-        const hide_button = document.createElement('div')
-        const hide = document.createElement('button')
-        hide.textContent = 'x';
-        hide.addEventListener("click", () => {
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-        // Stwórz kontener popupu
-        const popup = document.createElement("div");
-        popup.classList.add('popup-class')
-
-        // Zdjęcie
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
-        img.alt = item_map.get(item_id).name;
-        img.style.width = "100px";
-        img.style.height = "100px";
-        img.style.objectFit = "cover";
-        img.style.marginBottom = "10px";
-
-        // Informacje
-        const name = document.createElement("h3");
-        name.textContent = item_map.get(item_id).name;
-
-        const stock = document.createElement("p");
-        stock.textContent = "Dostępność: " + item_map.get(item_id).amount;
-
-        const price = document.createElement("p");
-        price.textContent = "Cena: " + item_map.get(item_id).price + " zł/szt";
-
-        // Pole ilości
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "1";
-        input.max = item_map.get(item_id).amount;
-        input.value = "1";
-        input.style.margin = "10px 0";
-        input.style.width = "80%";
-
-        // Przycisk dodaj
-        const button = document.createElement("button");
-        button.textContent = "Dodaj do koszyka";
-        button.style.marginTop = "10px";
-        button.style.padding = "8px 12px";
-        button.style.cursor = "pointer";
-
-        button.addEventListener("click", () => {
-            const amountToAdd = parseInt(input.value);
-
-            if (isNaN(amountToAdd) || amountToAdd < 1 || (cart_objet.get(item_id) + amountToAdd) > item_map.get(item_id).amount) {
-                input.style.border = "2px solid red";
-                return;
-            }
-            cart_objet.set(item_id, (cart_objet.get(item_id) || 0) + amountToAdd)
-            createCartItemCard(item_id)
-            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
-            document.getElementById('addAudio').currentTime = 0
-            document.getElementById('addAudio').play()
-            // Ukryj popup
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        // Dodaj wszystko do popupu
-        hide_button.appendChild(hide);
-        border.appendChild(hide_button)
-
-
-        popup.appendChild(img);
-        popup.appendChild(name);
-        popup.appendChild(stock);
-        popup.appendChild(price);
-        popup.appendChild(input);
-        popup.appendChild(button);
-        border.appendChild(popup)
-
-        messageBox.appendChild(border)
-        messageBox.style.display = "block";
-    }
-
-    function showRemoveFromCartPopup(item_id) {
-        if (!cart_objet.get(item_id)) {
-            return;
-        }
-        const item = item_map.get(item_id);
-
-        if (!item) {
-            console.warn("Przedmiot nie istnieje w koszyku.");
-            return;
-        }
-
-        const messageBox = document.getElementById("message");
-        messageBox.innerHTML = "";
-        const border = document.createElement('div')
-        border.classList.add('styled-border-popup')
-        const hide_button = document.createElement('div')
-        const hide = document.createElement('button')
-        hide.textContent = 'x';
-        hide.addEventListener("click", () => {
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        // Stwórz kontener popupu
-        const popup = document.createElement("div");
-        popup.classList.add('popup-class');
-
-        // Zdjęcie
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item.picture;
-        img.alt = item.name;
-        img.style.width = "100px";
-        img.style.height = "100px";
-        img.style.objectFit = "cover";
-        img.style.marginBottom = "10px";
-
-        const name = document.createElement("h3");
-        name.textContent = item.name;
-
-        const inCart = document.createElement("p");
-        inCart.textContent = "W koszyku: " + item.amount;
-
-        const price = document.createElement("p");
-        price.textContent = "Cena: " + item.price + " zł/szt";
-
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "1";
-        input.max = item.amount;
-        input.value = "1";
-        input.style.margin = "10px 0";
-        input.style.width = "80%";
-
-        const button = document.createElement("button");
-        button.textContent = "Usuń z koszyka";
-        button.style.marginTop = "10px";
-        button.style.padding = "8px 12px";
-        button.style.cursor = "pointer";
-
-        button.addEventListener("click", () => {
-            const toRemove = parseInt(input.value);
-            if (isNaN(toRemove) || toRemove < 1 || toRemove > item.amount) {
-                input.style.border = "2px solid red";
-                return;
-            }
-
-            if (toRemove >= cart_objet.get(item_id)) {
-                const card = document.getElementById(`cart-item-${item_id}`);
-                if (card) card.remove();
-                cart_objet.delete(item_id)
-                createCartItemCard(item_id)
-
-            } else {
-                cart_objet.set(item_id, (cart_objet.get(item_id) - toRemove))
-                createCartItemCard(item_id)
-            }
-            document.getElementById('removeAudio').currentTime = 0
-            document.getElementById('removeAudio').play()
-            sessionStorage.setItem("cart", JSON.stringify(cart_objet));
-            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
-
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        hide_button.appendChild(hide);
-        border.appendChild(hide_button)
-
-
-        popup.appendChild(img);
-        popup.appendChild(name);
-        popup.appendChild(price);
-        popup.appendChild(input);
-        popup.appendChild(button);
-        border.appendChild(popup)
-
-        messageBox.appendChild(border)
-        messageBox.style.display = "block";
-    }
-
-     window.addEventListener("DOMContentLoaded", () => {
-        loadCartFromSession();
-    });
-
-    function loadCartFromSession() {
-        const json = sessionStorage.getItem("sessionCart");
-        if (!json) {
-            // pusta mapa, jeśli nic nie ma
-        }
-        // Parsujemy do tablicy
-        const entries = JSON.parse(json);
-        // Odtwarzamy Mapę
-        let temp = new Map(entries);
-        let id_list = [];
-        temp.forEach((value, key) => {
-            cart_objet.set(key, value);
-            id_list.push(key);
-        })
-        getCartItemFromDB(id_list);
-        cart_objet.forEach( (value, key, map) =>{
-            createCartItemCard(key)
-        })
-        // Zaktualizuj całkowity koszt
-        const total = calculateTotal();
-        document.getElementById("cart-cost").innerText = total + " PLN";
-    }
-
-    function saveCartToSession() {
-        const entries = Array.from(cart_objet.entries());
-        // Serializujemy
-        const json = JSON.stringify(entries);
-        // Zapisujemy
-        sessionStorage.setItem("sessionCart", json);
-    }
-
-    function getCartItemFromDB(list_of_id){
-
-        fetch('sessionCartItemInfo', {
-            method:'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                ids:[...list_of_id]
-            }),
-        }).then(response =>{
-          if (!response.ok) throw new Error("Błąd sieci!");
-            return response.json();
-        }).then(data => {
-            console.log("Odpowiedź serwera:", data['received']);
-            if (data['received']) {
-                console.log('empty')
-            }
-            let items = JSON.parse(data['received'])
-            items.forEach( item => item_map.set(item.id ,item))
-            cart_objet.forEach((value, key, map) => createCartItemCard(key))
-        }).catch(error => {
-            console.error("Wystąpił błąd:", error);
-        })
-
-
-    }
-
-    function createCartItemCard(item_id) {
-        console.log('item sent to create cart function')
-        console.log(item_id)
-        console.log(cart_objet.get(item_id))
-        console.log(cart_objet)
-        if (cart_objet.get(item_id) === undefined) {
-            return;
-        }
-        let card = document.createElement('div');
-        if (document.getElementById(`cart-item-${item_id}`)) {
-            console.log('div found');
-            card = document.getElementById(`cart-item-${item_id}`);
-            card.innerHTML = '';
-        } else {
-            console.log('created new div');
-            card = document.createElement('div');
-            card.classList.add("mini-item-card");
-            card.id = `cart-item-${item_id}`;
-        }
-
-
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
-        img.alt = item_map.get(item_id).name;
-        img.classList.add("mini-item-img");
-        card.appendChild(img);
-
-        const name = document.createElement("p");
-        name.classList.add("mini-item-name");
-        name.textContent = item_map.get(item_id).name;
-        card.appendChild(name);
-
-        const details = document.createElement("p");
-        details.classList.add("mini-item-details");
-        details.textContent = `x${cart_objet.get(item_id)} | ${item_map.get(item_id).price} zł/szt`;
-        card.appendChild(details);
-
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Usuń";
-        removeBtn.classList.add("remove-button");
-        removeBtn.addEventListener("click", () => {
-            showRemoveFromCartPopup(item_id);
-        });
-        card.appendChild(removeBtn);
-        document.getElementById("cart-items").appendChild(card);
-
-        const total = calculateTotal();
-        document.getElementById("cart-cost").innerText = total + " PLN";
-    }
-
-    function calculateTotal() {
-        console.log('calculate price')
-        let total = 0;
-
-        cart_objet.forEach((value, key, mapInstance) => {
-            total += value * item_map.get(key).price
-        });
-
-        saveCartToSession()
-        animated_cart()
-        return total.toFixed(2);
-    }
-
-    function clearCart() {
-        sessionStorage.removeItem("cart");
-        sessionStorage.clear();
-        document.getElementById("cart-items").innerHTML = "";
-        document.getElementById("cart-cost").innerText = "0.00";
-        document.getElementById('removeAudio').currentTime = 0;
-        document.getElementById('removeAudio').play();
-        animated_cart();
-        cart_objet.clear();
-    }
-</script>
-<script>
-    function animated_cart() {
-        const div_cart = document.getElementById('cart-icon');
-        div_cart.classList.remove('animate-cart-start');
-        void div_cart.offsetWidth;
-        div_cart.classList.add('animate-cart-start');
-        div_cart.addEventListener('animationend', function handler() {
-            div_cart.classList.remove('animate-cart-start');
-            div_cart.removeEventListener('animationend', handler);
-        });
-    }
-
-</script>
-<script>
-    const cartIcon = document.getElementById('cart-icon');
-    const cartPanel = document.getElementById('cart-panel');
-
-    cartIcon.addEventListener('click', () => {
-        cartPanel.style.display = cartPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Możesz tu później dynamicznie dodawać produkty do #cart-items
-    // np. document.getElementById("cart-items").innerHTML += "<p>Produkt X</p>";
-
-    // Przykładowe przechwycenie formularza
-    document.getElementById('checkout-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert("Zamówienie złożone! ✉️");
-        // tutaj można wysłać dane do backendu
-    });
-</script>
 <footer>
+
     <div id="footer-main-container">
-        <div id="info-logo">
-            <img src="{{ url_for('static', filename='/images/favicon.gif') }}" alt="logo">
+        <div id="info">
             <a class="text-link">
                 <p>lin/info1</p>
             </a>
@@ -668,22 +172,32 @@
                 <p>lin/info1</p>
             </a>
         </div>
-        <div id="links">
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/instagram.svg') }}"
-                     alt="instagram">
-            </a>
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/facebook.svg') }}" alt="facebook">
-            </a>
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/tiktok.svg') }}" alt="tiktok">
-            </a>
-            <a class="logo-link" href="https://www.linkedin.com/in/adrian-adam-zajac/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/linkedin.svg') }}" alt="linkedin">
-            </a>
+        <div style="display: grid;   text-align: center;">
+            <img style="  max-width: 100vw;" src="{{ url_for('static', filename='/images/smallKiki.webp') }}"
+                 alt="logo">
+
+
+            <div id="links">
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/instagram.svg') }}"
+                         alt="instagram">
+                </a>
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/facebook.svg') }}"
+                         alt="facebook">
+                </a>
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/tiktok.svg') }}" alt="tiktok">
+                </a>
+                <a class="logo-link" href="https://www.linkedin.com/in/adrian-adam-zajac/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/linkedin.svg') }}"
+                         alt="linkedin">
+                </a>
+            </div>
         </div>
+
     </div>
+
 </footer>
 </body>
 </html>

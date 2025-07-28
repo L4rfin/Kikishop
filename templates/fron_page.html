@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Sue Ellen Francisco' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/front.css') }}">
@@ -10,29 +11,33 @@
 </head>
 <body>
 
-<header>
-    <div id="info-banner">
-        <h1 style="margin: 0; text-align: center"> we're sending order on monday</h1>
-    </div>
+<div id="info-banner">
+    <h1 id="info-h1"> we're sending order on monday</h1>
+</div>
+
+<div id="sticky-nav">
     <div id="goback"><a href="{{ url_for('list_page') }}"> 📦 </a></div>
+    <h1 style="margin: -21px;   text-shadow: 3px 3px 0px #7de8c2;" class="ultralarge-text h2-dark-pink">KIKI</h1>
+    <div id="cart-icon">🛒</div>
+</div>
+<header>
 
-    <div id="header-img-box">
-        <div>
-            <h1 id="header-text" style="text-align: start"></h1>
-            <h1 style="font-size: medium" id="header-text"></h1>
 
-        </div>
-        <br>
-    </div>
     <div class="image-text-container">
         <a href="{{ url_for('list_page') }}">
-            <img id="header-img" src="{{ url_for('static', filename='/images/Kiki.webp') }}" alt="logo">
+            <img id="header-img" src="{{ url_for('static', filename='/images/Kiki.png') }}" alt="logo">
         </a>
 
         <div class="text-content">
-            <h2>Hi, welcome in my shop </h2>
-            <p>
+            <h2 id="header-h2" class="h2-dark-pink ultralarge-text">Hi, welcome in my shop </h2>
+            <p class="header-p">
                 press me to get to warehouse or go down ;)
+            </p>
+            <p class="header-p">
+                this many people visited {{ visitors | safe }}
+            </p>
+            <p class="header-p">
+                and I have this many stuf to show you {{ number_of_items | safe }}
             </p>
         </div>
     </div>
@@ -41,305 +46,97 @@
 <main>
 
     <div class="styled-border">
-        <h2 id="header-text">the page it's still work in progress, so you can't buy directly from it but send me your
+        <h2 id="header-text" class="disclaimer">the page it's still work in progress, so you can't buy directly from it
+            but send me your
             cart on instagram/facebook or email and I will make it happen </h2>
     </div>
-    <div id="news-div">
-
-        <div id="news-tab">
-            <h1>My favorite tatoo </h1>
-            <div class="item-news">
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo1.webp') }}"
-                                 alt="tatoo1">
-                            <h1>
-                                tatoo numer 1
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo2.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 2
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo3.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 2
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo4.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 3
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo5.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 4
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo6.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 5
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo7.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                tatoo numer 6
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <div id="news-tab">
-            <h1>Event and spots I was on</h1>
-            <div class="item-news">
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo1.webp') }}"
-                                 alt="tatoo1">
-                            <h1>
-                                ewent 1
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo2.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                ewent 2
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo3.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                ewent 3
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo4.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                ewent 4
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="styled-border">
-                        <div class="card-news">
-
-                            <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo5.webp') }}"
-                                 alt="tatoo2">
-                            <h1>
-                                ewent 5
-                            </h1>
-                            <h3>
-                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <div class="div-spacer"></div>
 
     <div id="event-plan-layout">
 
-        <div id="event-plan-div">
+
+        <div class="styled-border" id="event-plan-div">
             <div id="event-plan-header">
-                <h3>
-                    here is events I will go to or planing to go
-                </h3>
+                <h1 class="h2-dark-pink">
+                    here is events I plan to go
+                </h1>
             </div>
-            <div id="event-plan-main">
-
-                <div id="event-plan-text">
-
-
-                    <div style="display: grid; justify-content: space-between;" id="links">
-                        <div>
-                            <h2>event 1</h2>
-                        </div>
-                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo5.webp') }}"
-                             alt="event1">
-
-                        <p>10-13.12.2025</p>
-                        <p>City Malbork</p>
-
-                    </div>
-
-                </div>
-                <div style="display: grid; justify-content: space-between;" id="links">
+            <div class="item-news">
+                <div id="event-plan-main">
                     <div>
-                        <h2>event 1</h2>
+
+                        <div class="card-news">
+                            <img class="news-image"
+                                 src=" {{ url_for('static', filename='/images/events/fantastyka-gdansk.png') }}"
+                                 alt="Wakacyjne Targi Fantastyki Gdańsk">
+                            <h1>
+                                Wakacyjne Targi Fantastyki Gdańsk
+                            </h1>
+                            <h3>
+                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                            </h3>
+                        </div>
                     </div>
-                    <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo5.webp') }}"
-                         alt="event1">
-                    <p>10-13.12.2025</p>
-                    <p>City Malbork</p>
+
+                    <div>
+
+
+                        <div class="card-news">
+                            <img class="news-image"
+                                 src=" {{ url_for('static', filename='/images/events/unicat.jpg') }}"
+                                 alt="Targi Unikatów Gdańsk">
+                            <h1>
+                                Targi Unikatów Gdańsk
+                            </h1>
+                            <h3>
+                                jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                            </h3>
+                        </div>
+                    </div>
 
                 </div>
-
             </div>
         </div>
+
         <div>
 
-            <div id="event-plan-div">
+            <div class="styled-border" id="event-plan-div">
                 <div id="event-plan-header">
-                    <h3>
+                    <h1 class="h2-dark-pink">
                         City where I was on a guest spot
-                    </h3>
-                    <div style="display: flex; justify-content: space-between;">
+                    </h1>
+                    <div style="display: flex; justify-content: center;">
 
                         <h4>
                             <ul>
-                                <li>Kraków ✓</li>
-                                <li>Warszawa ✓</li>
-                                <li>Poznań ✓</li>
-                                <li>Kraków ✓</li>
-                                <li>Częstochowa ✓</li>
-                                <li>Słupsk ✓</li>
-                                <li>Źelona Góra ✓</li>
-                                <li>Hell ✓</li>
-                                <li>Białystok ✓</li>
+                                <li>Torń ✓</li>
+                                <li>Szczecin ✓</li>
+                                <li>Bydgoszcz ✓</li>
+                            </ul>
+
+                            <ul>
+                                <h3>I will be</h3>
+                                <li>Łódź</li>
                             </ul>
                         </h4>
-                        <div>
-                            <img src="{{ url_for('static', filename='/images/favicon.gif') }}" alt="logo">
-                        </div>
                     </div>
                 </div>
             </div>
-            <div id="event-plan-div">
+            <div class="styled-border" id="event-plan-div">
                 <div id="event-plan-header">
-                    <h3>
+                    <h1 class="h2-dark-pink">
                         City I want to go no guest spot
-                    </h3>
-                    <div style="display: flex; justify-content: space-between;">
+                    </h1>
+                    <div style="display: flex; justify-content: center;">
 
                         <h4>
                             <ul>
-                                <li>Kielca ꨄ</li>
-                                <li>Opole ꨄ</li>
-                                <li>Rzeszów ꨄ</li>
-                                <li>Gliwice ꨄ</li>
-                                <li>Kalisz ꨄ</li>
-                                <li>Gniezno ꨄ</li>
-                                <li>Zamość ꨄ</li>
+                                <li>Warszawa ꨄ</li>
+                                <li>Wrocław ꨄ</li>
+                                <li>Poznań ꨄ</li>
+                                <li>Kraków ꨄ</li>
                             </ul>
                         </h4>
-                        <div>
-                            <img src="{{ url_for('static', filename='/images/favicon.gif') }}" alt="logo">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -347,17 +144,18 @@
         </div>
 
     </div>
+    <div class="div-spacer"></div>
 
 
     <div id="custom-work-div">
         <div id="custom-work-header">
-            <h2>interested in custom print sticker or tatoo?</h2>
+            <h1 class="h2-dark-pink ultralarge-text">interested in custom print sticker or tatoo?</h1>
         </div>
 
         <div id="custom-work-main">
 
             <div id="custom-work-text">
-                <h3>
+                <h3 id="custom-h3">
                     hit me up on any of this social media and let's cook something up!
                 </h3>
 
@@ -379,22 +177,25 @@
                 <h4>custom work <br> custom price</h4>
             </div>
             <div id="custom-work-image-box">
-                <img id="custom-work-image" src="{{ url_for('static', filename='/images/Kiki.webp') }}" alt="photo-of-mee">
+                <img id="custom-work-image" src="{{ url_for('static', filename='/images/Kiki.png') }}"
+                     alt="photo-of-mee">
             </div>
 
         </div>
     </div>
 
+    <div class="div-spacer"></div>
 
     <div id="heder-of-news-section">
-        <h3>here is the merch I made recently <3 </h3>
+        <h1 style="  text-align: center; margin: 0;" class="h2-dark-pink ultralarge-text">here is the stuf I made
+            recently <3 </h1>
     </div>
-    <div id="cart-icon">
-        🛒
-    </div>
+
+
+    <audio id="fiesta" src="{{ url_for('static', filename='sounds/fiesta.mp3') }}" preload="auto"></audio>
     <audio id="removeAudio" src="{{ url_for('static', filename='sounds/removeSound.wav') }}" preload="auto"></audio>
     <audio id="addAudio" src="{{ url_for('static', filename='sounds/addSound.wav') }}" preload="auto"></audio>
-    <div id="cart-panel">
+    <div id="cart-panel" style="right: -100vw">
         <h2>Twój koszyk</h2>
         <div id="cart-items">
         </div>
@@ -405,10 +206,58 @@
 
         <h3>Dane do wysyłki</h3>
         <form id="checkout-form">
-            <input type="text" name="name" placeholder="Imię i nazwisko" required><br>
-            <input type="text" name="address" placeholder="Adres dostawy" required><br>
-            <input type="email" name="email" placeholder="Adres e-mail" required><br>
-            <button type="submit">Zamów</button>
+            <label>
+                name and surname
+                <input type="text" name="name" placeholder="" required><br>
+            </label>
+            <label>
+                street
+                <input type="text" name="street" placeholder="street" required>
+            </label>
+            <label>
+                building / local / letter
+            </label>
+            <label style="display: flex">
+                <input type="number" name="building_number" placeholder="building-number" required>
+                <input type="number" name="local_number" placeholder="local-number">
+                <input type="text" name="local_letter" placeholder="local-letter">
+            </label>
+            <label>
+                post code 2 | post code 3
+            </label>
+            <label style="  display: flex;">
+                <input type="number" name="post_code_2" placeholder="00" required>
+                <input type="number" name="post_code_3" placeholder="000" required>
+            </label>
+            <label>
+                location
+            </label>
+            <label>
+                <input type="text" name="city" placeholder="Warsaw" required>
+            </label>
+            <label>
+                cuntry
+            </label>
+            <label>
+                <input type="text" name="cuntry" placeholder="Poland" required>
+            </label>
+
+            <label>
+                preferowana forma komunikacji
+                <select id="communication-option" onchange="setSelectionInput()" name="communication-option">
+                    <option>Email</option>
+                </select>
+            </label>
+            <label>
+                email address
+                <input type="email" placeholder="example@gamil.com" id="input-for-communication-address"
+                       name="contact_address">
+            </label>
+            <br>
+            <br>
+            <label id="label-for-communication-method">
+            </label>
+            <button id="checkout-button" type="button">Zamów</button>
         </form>
     </div>
 
@@ -418,20 +267,206 @@
             <div id="clea-message"></div>
         </div>
     </div>
-
-
     <div class="border">
-
-        <div id="item_list" class="item_list">
+        <div style="background-color: #d3f3e6;margin-left: 5VW;  margin-right: 5VW;border-radius: 10px;">
+            <div id="item_list" class="item_list styled-border"></div>
         </div>
     </div>
-</main>
+    <div class="div-spacer"></div>
+    <div id="heder-of-news-section">
+        <h1 style="  text-align: center; margin: 0;" class="h2-dark-pink ultralarge-text">about me </h1>
+    </div>
+    <div id="news-div">
 
+        <div id="item-news-1" class="news-tab">
+            <h1 class="pressable-h1 h2-dark-pink" onclick="focusOnNewsTab('item-news-1','item-news-2')">My favorite
+                tatoo</h1>
+            <div class="item-news">
+                <div>
+
+                    <div class="card-news">
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo1.webp') }}"
+                             alt="tatoo1">
+                        <h1>
+                            tatoo numer 1
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+                </div>
+                <div>
+
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo2.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 2
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+
+                    </div>
+                </div>
+                <div>
+
+
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo3.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 2
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+
+                    </div>
+                </div>
+                <div>
+
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo4.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 3
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+
+                    </div>
+                </div>
+                <div>
+
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo5.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 4
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo6.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 5
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="card-news">
+
+                        <img class="news-image" src=" {{ url_for('static', filename='/images/tatoo7.webp') }}"
+                             alt="tatoo2">
+                        <h1>
+                            tatoo numer 6
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div id="item-news-2" class="news-tab">
+            <h1 class="pressable-h1 h2-dark-pink" onclick="focusOnNewsTab('item-news-2','item-news-1')">Event's I was
+                on</h1>
+            <div class="item-news">
+
+                <div>
+
+                    <div class="card-news">
+                        <img class="news-image"
+                             src=" {{ url_for('static', filename='/images/events/remcon.webp') }}"
+                             alt="event1-remcon">
+                        <h1>
+                            Remcon
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+                </div>
+                <div>
+
+                    <div class="card-news">
+                        <img class="news-image"
+                             src=" {{ url_for('static', filename='/images/events/fantastyka-warszawa.jpg') }}"
+                             alt="event2-Warszawskie-targi-fantastyki">
+                        <h1>
+                            Warszawskie Targi Fantastyki
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+                </div>
+
+
+                <div>
+
+                    <div class="card-news">
+                        <img class="news-image"
+                             src=" {{ url_for('static', filename='/images/events/elysium.png') }}"
+                             alt="event3-Elysium">
+                        <h1>
+                            Elysium
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+                </div>
+
+                <div>
+
+                    <div class="card-news">
+                        <img class="news-image"
+                             src=" {{ url_for('static', filename='/images/events/scyzorykon.jpg') }}"
+                             alt="event4-Scyzorykon">
+                        <h1>
+                            Scyzorykon 2025
+                        </h1>
+                        <h3>
+                            jakaś tam paplanima o i jak <br> lorem ipsum czy coskolwiek
+                        </h3>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+<div class="div-spacer"></div>
 <footer>
 
     <div id="footer-main-container">
-        <div id="info-logo">
-            <img src="{{ url_for('static', filename='/images/smallKiki.webp') }}" alt="logo">
+        <div id="info">
             <a class="text-link">
                 <p>lin/info1</p>
             </a>
@@ -442,462 +477,48 @@
                 <p>lin/info1</p>
             </a>
         </div>
-        <div id="links">
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/instagram.svg') }}"
-                     alt="instagram">
-            </a>
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/facebook.svg') }}" alt="facebook">
-            </a>
-            <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/tiktok.svg') }}" alt="tiktok">
-            </a>
-            <a class="logo-link" href="https://www.linkedin.com/in/adrian-adam-zajac/">
-                <img class="social-media" src="{{ url_for('static', filename='/images/linkedin.svg') }}" alt="linkedin">
-            </a>
-        </div>
+        <div style="display: grid;   text-align: center;">
+            <img style="  max-width: 100vw;" src="{{ url_for('static', filename='/images/smallKiki.webp') }}"
+                 alt="logo">
 
+
+            <div id="links">
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/instagram.svg') }}"
+                         alt="instagram">
+                </a>
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/facebook.svg') }}"
+                         alt="facebook">
+                </a>
+                <a class="logo-link" href="https://www.instagram.com/kikaria.ink/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/tiktok.svg') }}" alt="tiktok">
+                </a>
+                <a class="logo-link" href="https://www.linkedin.com/in/adrian-adam-zajac/">
+                    <img class="social-media" src="{{ url_for('static', filename='/images/linkedin.svg') }}"
+                         alt="linkedin">
+                </a>
+                <button onclick="fiesta()">don't</button>
+            </div>
+        </div>
+        <div id="dont"></div>
     </div>
-
 </footer>
-
-
+<script src="{{ url_for('static', filename='/js/operation_finalizer.js') }}"></script>
+<script src=" {{ url_for('static', filename='/js/card_generator.js') }}"></script>
+<script src=" {{ url_for('static', filename="/js/cart.js") }}"></script>
+<script src=" {{ url_for('static', filename="/js/animation.js") }}"></script>
 <script>
     let list_of_items = {{ items | tojson | safe }};
     const data = JSON.parse(list_of_items);
-    let card_list = document.getElementById('item_list');
-    const cart_objet = new Map()
-    const item_map = new Map()
+
     data.forEach(item => {
-        card_list.appendChild(generate_item_card(item));
+        card_list_item_list.appendChild(generate_item_card(item));
         item_map.set(item.id, item)
     });
 
-    function generate_item_card(item) {
-        const info_section = document.createElement('div');
-        info_section.classList.add('info-section');
-
-        const top_info = document.createElement('div');
-        top_info.classList.add('top-info');
-
-        const button_info = document.createElement('div');
-        button_info.classList.add('button_info');
-
-        const styled_border = document.createElement('div');
-        styled_border.classList.add('styled-border');
-        styled_border.classList.add('wave-background');
-
-        const card = document.createElement('div');
-        card.classList.add('card');
-
-        const new_img = document.createElement('img');
-        new_img.classList.add('item-pic');
-        new_img.src = "data:image/jpeg;base64," + item.picture;
-        new_img.alt = item.name;
-
-        const nameEl = document.createElement('h2');
-        nameEl.classList.add('item_name');
-        nameEl.textContent = item.name;
-
-        function createInfoRow(label, value) {
-            const row = document.createElement('p');
-            row.classList.add('par');
-            if (label === 'price') {
-                row.innerHTML = `<strong>${label}:</strong> ${value} PLN`;
-            } else {
-                row.innerHTML = `<strong>${label}:</strong> ${value}`;
-            }
-            return row;
-        }
-
-        const button = document.createElement('button');
-        button.id = 'button' + item.id;
-        button.className = 'action-button';
-        button.textContent = 'Kup teraz';
-
-        button.addEventListener('click', () => {
-            button.addEventListener('click', () => {
-                showAddToCartPopup(item.id);
-            });
-        });
-
-
-        styled_border.appendChild(card);
-        card.appendChild(new_img);
-        card.appendChild(info_section);
-        info_section.appendChild(top_info);
-        info_section.appendChild(button_info);
-
-        button_info.appendChild(createInfoRow('Typ', item.type));
-        button_info.appendChild(createInfoRow('source', item.work_source));
-        button_info.appendChild(createInfoRow('genre', item.type));
-        button_info.appendChild(createInfoRow('tags', item.tags));
-        button_info.appendChild(createInfoRow('feature', item.feature));
-        button_info.appendChild(createInfoRow('drop data', item.drop_data));
-        button_info.appendChild(createInfoRow('renewable', item.renewable));
-
-        top_info.appendChild(nameEl);
-        top_info.appendChild(createInfoRow('price', item.price));
-        top_info.appendChild(createInfoRow('amount', item.amount));
-        info_section.appendChild(button);
-
-        return styled_border;
-    }
-
-    function showAddToCartPopup(item_id) {
-        const messageBox = document.getElementById("message");
-        messageBox.innerHTML = ""; // Czyści zawartość
-        messageBox.style.display = "block";
-
-        const border = document.createElement('div')
-        border.classList.add('styled-border-popup')
-        const hide_button = document.createElement('div')
-        const hide = document.createElement('button')
-        hide.textContent = 'x';
-        hide.addEventListener("click", () => {
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-        // Stwórz kontener popupu
-        const popup = document.createElement("div");
-        popup.classList.add('popup-class')
-
-        // Zdjęcie
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
-        img.alt = item_map.get(item_id).name;
-        img.style.width = "100px";
-        img.style.height = "100px";
-        img.style.objectFit = "cover";
-        img.style.marginBottom = "10px";
-
-        // Informacje
-        const name = document.createElement("h3");
-        name.textContent = item_map.get(item_id).name;
-
-        const stock = document.createElement("p");
-        stock.textContent = "Dostępność: " + item_map.get(item_id).amount;
-
-        const price = document.createElement("p");
-        price.textContent = "Cena: " + item_map.get(item_id).price + " zł/szt";
-
-        // Pole ilości
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "1";
-        input.max = item_map.get(item_id).amount;
-        input.value = "1";
-        input.style.margin = "10px 0";
-        input.style.width = "80%";
-
-        // Przycisk dodaj
-        const button = document.createElement("button");
-        button.textContent = "Dodaj do koszyka";
-        button.style.marginTop = "10px";
-        button.style.padding = "8px 12px";
-        button.style.cursor = "pointer";
-
-        button.addEventListener("click", () => {
-            const amountToAdd = parseInt(input.value);
-
-            if (isNaN(amountToAdd) || amountToAdd < 1 || (cart_objet.get(item_id) + amountToAdd) > item_map.get(item_id).amount) {
-                input.style.border = "2px solid red";
-                return;
-            }
-            cart_objet.set(item_id, (cart_objet.get(item_id) || 0) + amountToAdd)
-            createCartItemCard(item_id)
-            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
-            document.getElementById('addAudio').currentTime = 0
-            document.getElementById('addAudio').play()
-            // Ukryj popup
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        // Dodaj wszystko do popupu
-        hide_button.appendChild(hide);
-        border.appendChild(hide_button)
-
-
-        popup.appendChild(img);
-        popup.appendChild(name);
-        popup.appendChild(stock);
-        popup.appendChild(price);
-        popup.appendChild(input);
-        popup.appendChild(button);
-        border.appendChild(popup)
-
-        messageBox.appendChild(border)
-        messageBox.style.display = "block";
-    }
-
-    function showRemoveFromCartPopup(item_id) {
-        if (!cart_objet.get(item_id)) {
-            return;
-        }
-        const item = item_map.get(item_id);
-
-        if (!item) {
-            console.warn("Przedmiot nie istnieje w koszyku.");
-            return;
-        }
-
-        const messageBox = document.getElementById("message");
-        messageBox.innerHTML = "";
-        const border = document.createElement('div')
-        border.classList.add('styled-border-popup')
-        const hide_button = document.createElement('div')
-        const hide = document.createElement('button')
-        hide.textContent = 'x';
-        hide.addEventListener("click", () => {
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        // Stwórz kontener popupu
-        const popup = document.createElement("div");
-        popup.classList.add('popup-class');
-
-        // Zdjęcie
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item.picture;
-        img.alt = item.name;
-        img.style.width = "100px";
-        img.style.height = "100px";
-        img.style.objectFit = "cover";
-        img.style.marginBottom = "10px";
-
-        const name = document.createElement("h3");
-        name.textContent = item.name;
-
-        const inCart = document.createElement("p");
-        inCart.textContent = "W koszyku: " + item.amount;
-
-        const price = document.createElement("p");
-        price.textContent = "Cena: " + item.price + " zł/szt";
-
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "1";
-        input.max = item.amount;
-        input.value = "1";
-        input.style.margin = "10px 0";
-        input.style.width = "80%";
-
-        const button = document.createElement("button");
-        button.textContent = "Usuń z koszyka";
-        button.style.marginTop = "10px";
-        button.style.padding = "8px 12px";
-        button.style.cursor = "pointer";
-
-        button.addEventListener("click", () => {
-            const toRemove = parseInt(input.value);
-            if (isNaN(toRemove) || toRemove < 1 || toRemove > item.amount) {
-                input.style.border = "2px solid red";
-                return;
-            }
-
-            if (toRemove >= cart_objet.get(item_id)) {
-                const card = document.getElementById(`cart-item-${item_id}`);
-                if (card) card.remove();
-                cart_objet.delete(item_id)
-                createCartItemCard(item_id)
-
-            } else {
-                cart_objet.set(item_id, (cart_objet.get(item_id) - toRemove))
-                createCartItemCard(item_id)
-            }
-            document.getElementById('removeAudio').currentTime = 0
-            document.getElementById('removeAudio').play()
-            sessionStorage.setItem("cart", JSON.stringify(cart_objet));
-            document.getElementById("cart-cost").innerText = calculateTotal() + " zł";
-
-            messageBox.innerHTML = "";
-            messageBox.style.display = "none";
-        });
-
-        hide_button.appendChild(hide);
-        border.appendChild(hide_button)
-
-
-        popup.appendChild(img);
-        popup.appendChild(name);
-        popup.appendChild(price);
-        popup.appendChild(input);
-        popup.appendChild(button);
-        border.appendChild(popup)
-
-        messageBox.appendChild(border)
-        messageBox.style.display = "block";
-    }
-</script>
-<script>
-    window.addEventListener("DOMContentLoaded", () => {
-        loadCartFromSession();
-    });
-
-    function loadCartFromSession() {
-        const json = sessionStorage.getItem("sessionCart");
-        if (!json) {
-            // pusta mapa, jeśli nic nie ma
-        }
-        // Parsujemy do tablicy
-        const entries = JSON.parse(json);
-        // Odtwarzamy Mapę
-        let temp = new Map(entries);
-        let id_list = [];
-        temp.forEach((value, key) => {
-            cart_objet.set(key, value);
-            id_list.push(key);
-        })
-        getCartItemFromDB(id_list);
-        cart_objet.forEach((value, key, map) => {
-            createCartItemCard(key)
-        })
-        // Zaktualizuj całkowity koszt
-        const total = calculateTotal();
-        document.getElementById("cart-cost").innerText = total + " zł";
-    }
-
-    function saveCartToSession() {
-        const entries = Array.from(cart_objet.entries());
-        // Serializujemy
-        const json = JSON.stringify(entries);
-        // Zapisujemy
-        sessionStorage.setItem("sessionCart", json);
-    }
-
-    function getCartItemFromDB(list_of_id) {
-
-        fetch('sessionCartItemInfo', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                ids: [...list_of_id]
-            }),
-        }).then(response => {
-            if (!response.ok) throw new Error("Błąd sieci!");
-            return response.json();
-        }).then(data => {
-            console.log("Odpowiedź serwera:", data['received']);
-            if (data['received']) {
-                console.log('empty')
-            }
-            let items = JSON.parse(data['received'])
-            items.forEach(item => item_map.set(item.id, item))
-            cart_objet.forEach((value, key, map) => createCartItemCard(key))
-        }).catch(error => {
-            console.error("Wystąpił błąd:", error);
-        })
-
-
-    }
-
-    function createCartItemCard(item_id) {
-        console.log('item sent to create cart function')
-        console.log(item_id)
-        console.log(cart_objet.get(item_id))
-        console.log(cart_objet)
-        if (cart_objet.get(item_id) === undefined) {
-            return;
-        }
-        let card = document.createElement('div');
-        if (document.getElementById(`cart-item-${item_id}`)) {
-            console.log('div found');
-            card = document.getElementById(`cart-item-${item_id}`);
-            card.innerHTML = '';
-        } else {
-            console.log('created new div');
-            card = document.createElement('div');
-            card.classList.add("mini-item-card");
-            card.id = `cart-item-${item_id}`;
-        }
-
-
-        const img = document.createElement("img");
-        img.src = "data:image/jpeg;base64," + item_map.get(item_id).picture;
-        img.alt = item_map.get(item_id).name;
-        img.classList.add("mini-item-img");
-        card.appendChild(img);
-
-        const name = document.createElement("p");
-        name.classList.add("mini-item-name");
-        name.textContent = item_map.get(item_id).name;
-        card.appendChild(name);
-
-        const details = document.createElement("p");
-        details.classList.add("mini-item-details");
-        details.textContent = `x${cart_objet.get(item_id)} | ${item_map.get(item_id).price} zł/szt`;
-        card.appendChild(details);
-
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Usuń";
-        removeBtn.classList.add("remove-button");
-        removeBtn.addEventListener("click", () => {
-            showRemoveFromCartPopup(item_id);
-        });
-        card.appendChild(removeBtn);
-        document.getElementById("cart-items").appendChild(card);
-    }
-
-    function calculateTotal() {
-        console.log('calculate price')
-        let total = 0;
-
-        cart_objet.forEach((value, key, mapInstance) => {
-            total += value * item_map.get(key).price
-        });
-
-        saveCartToSession()
-        animated_cart()
-        return total.toFixed(2);
-    }
-
-    function clearCart() {
-        sessionStorage.removeItem("cart");
-        sessionStorage.clear();
-        document.getElementById("cart-items").innerHTML = "";
-        document.getElementById("cart-cost").innerText = "0.00";
-        document.getElementById('removeAudio').currentTime = 0;
-        document.getElementById('removeAudio').play();
-        animated_cart();
-        cart_objet.clear();
-    }
-</script>
-<script>
-    const cartIcon = document.getElementById('cart-icon');
-    const cartPanel = document.getElementById('cart-panel');
-
-    cartIcon.addEventListener('click', () => {
-        cartPanel.style.display = cartPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Możesz tu później dynamicznie dodawać produkty do #cart-items
-    // np. document.getElementById("cart-items").innerHTML += "<p>Produkt X</p>";
-
-    // Przykładowe przechwycenie formularza
-    document.getElementById('checkout-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert("Zamówienie złożone! ✉️");
-        // tutaj można wysłać dane do backendu
-    });
 </script>
 
-{#element animacji#}
-<script>
-    function animated_cart() {
-        const div_cart = document.getElementById('cart-icon');
-        div_cart.classList.remove('animate-cart-start');
-        void div_cart.offsetWidth;
-        div_cart.classList.add('animate-cart-start');
-        div_cart.addEventListener('animationend', function handler() {
-            div_cart.classList.remove('animate-cart-start');
-            div_cart.removeEventListener('animationend', handler);
-        });
-    }
-
-</script>
 
 </body>
 </html>
