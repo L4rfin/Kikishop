@@ -237,13 +237,19 @@ function wrongEmailResponder() {
 
 function sendOrder(data_info) {
     let items_ids = ''
-    cart_objet.forEach((value, key) => items_ids += key + ',')
+    let items_value = ''
+
+    cart_objet.forEach((value, key) =>{
+        items_ids += key + ','
+        items_value += value + ','
+    })
     fetch('orderSender', {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             name: data_info.name,
             items: items_ids,
+            items_amount: items_value,
             price: total_price,
             city: data_info.city,
             street: data_info.street,
@@ -297,7 +303,7 @@ function orderInfoPopup(order_id) {
     const img = document.createElement('img');
     img.src = '/static/images/smallKiki.webp';
     img.alt = 'thank you';
-    img.style.width = "100%"
+    img.style.width = "50%"
 
     // Składanie struktury
     div.appendChild(p);

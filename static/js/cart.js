@@ -96,8 +96,7 @@ function showRemoveFromCartPopup(item_id) {
     if (!cart_objet.get(item_id)) {
         return;
     }
-    if (item_map.get(item_id)===undefined) return;
-    const item = item_map.get(item_id);
+    const item = cart_object_info.get(item_id);
 
     if (!item) {
         console.warn("Przedmiot nie istnieje w koszyku.");
@@ -122,7 +121,7 @@ function showRemoveFromCartPopup(item_id) {
 
     // Zdjęcie
     const img = document.createElement("img");
-    img.src = "data:image/jpeg;base64," + item.picture;
+    img.src = "data:image/jpeg;base64," +  item.img;
     img.alt = item.name;
     img.style.width = "100px";
     img.style.height = "100px";
@@ -272,6 +271,7 @@ function createCartItemCard(item_id) {
     console.log(item_id)
     console.log(cart_objet.get(item_id))
     console.log(cart_objet)
+    console.log(cart_object_info.get(item_id).img)
     if (cart_objet.get(item_id) === undefined) {
         return;
     }
@@ -288,20 +288,20 @@ function createCartItemCard(item_id) {
     }
 
 
-    const img = document.createElement("img");
-    img.src = "data:image/jpeg;base64," + item_map.get(item_id).img;
-    img.alt = item_map.get(item_id).name;
-    img.classList.add("mini-item-img");
-    card.appendChild(img);
+    const htmlImageElement = document.createElement("img");
+    htmlImageElement.src = "data:image/jpeg;base64," + cart_object_info.get(item_id).picture;
+    htmlImageElement.alt = cart_object_info.get(item_id).name;
+    htmlImageElement.classList.add("mini-item-img");
+    card.appendChild(htmlImageElement);
 
     const name = document.createElement("p");
     name.classList.add("mini-item-name");
-    name.textContent = item_map.get(item_id).name;
+    name.textContent = cart_object_info.get(item_id).name;
     card.appendChild(name);
 
     const details = document.createElement("p");
     details.classList.add("mini-item-details");
-    details.textContent = `x${cart_objet.get(item_id)} | ${item_map.get(item_id).price} zł/szt`;
+    details.textContent = `x${cart_objet.get(item_id)} | ${cart_object_info.get(item_id).price} zł/szt`;
     card.appendChild(details);
 
     const removeBtn = document.createElement("button");
@@ -321,7 +321,7 @@ function calculateTotal() {
     console.log('calculate price')
     let total = 0;
     cart_objet.forEach((value, key, mapInstance) => {
-        total += value * item_map.get(key).price
+        total += value * cart_object_info.get(key).price
     });
 
     saveCartToSession();
@@ -338,4 +338,5 @@ function clearCart() {
     document.getElementById('removeAudio').play();
     animated_cart();
     cart_objet.clear();
+    cart_object_info.clear();
 }

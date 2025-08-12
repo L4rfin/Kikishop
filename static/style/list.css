@@ -9,10 +9,6 @@ header {
     height: 20%;
 }
 
-main {
-
-}
-
 #select-layout {
     display: flex;
     background-position: center;
@@ -105,6 +101,27 @@ main {
     width: 20vw
 }
 
+.page-button {
+    margin: 5px;
+    background-color: #ffa6a6;
+    border: 4px solid #ef4a60;
+    border-radius: 50%;
+    padding: 2px;
+    font-family: 'Sue Ellen Francisco', serif;
+    font-size: x-large;
+    font-weight: bolder;
+    width: 50px;
+}
+
+.page-button:hover {
+    background-color: #ef4a60;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
     #select-layout {
         display: grid;
@@ -117,7 +134,7 @@ main {
     #select-img {
         width: 60vw;
         max-width: 50%;
-          margin-left: 50px;
+        margin-left: 50px;
     }
 
     .card {
